@@ -1,0 +1,13 @@
+{% extends "imovie/base.html" %}
+{% block content %}
+<div id="sidebar">
+    {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
+</div>
+<h1>
+	{{ actor.name }}
+</h1>
+<p>
+	<birthday> Birthday: {{ actor.birthday }} </birthday>
+	<biography> Overview: {{ actor.biography }} </biography>
+</p>
+{% endblock %}

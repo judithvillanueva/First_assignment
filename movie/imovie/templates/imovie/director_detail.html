@@ -1,0 +1,19 @@
+{% extends "imovie/base.html" %}
+{% block content %}
+<div id="sidebar">
+    {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
+</div>
+<h1>
+	{{ director.name }}
+</h1>
+<p>
+	<birthday> Birthday: {{ director.birthday }} </birthday>
+	<biography> Overview: {{ director.biography }} </biography>
+	<movies>
+		{% for movie in director.movies.all %}
+			<li><a href="{% url 'imovie:MovieDetail' movie.id 'html' %}">
+				{{ movie.name }}</a></li>
+		{% endfor %}
+	</movies>
+</p>
+{% endblock %}

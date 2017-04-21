@@ -1,0 +1,16 @@
+{% extends "imovie/base.html" %}
+{% block content %}
+<div id="sidebar">
+    {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
+</div>
+<h1>
+	Directors
+</h1>
+<u1>
+	{% for director in latest_director_list %}
+		<li><a href="./{{director.id}}">
+			{{ director.name }}</a></li>
+	{% empty %}<li>Sorry, no directors registered yet.</li>
+	{% endfor %}
+</u1>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "imovie/base.html" %}
+{% block content %}
+<div id="sidebar">
+    {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
+</div>
+<h1>
+	{{ movie.name }}
+</h1>
+<p>
+	<year> Year: {{ movie.year }} </year>
+	<overview> Overview: {{ movie.overview }} </overview>
+	<director> Director: {{ movie.director }} </director> <br />
+	<actors> Actors:
+		{% for actor in movie.actors.all %}
+			<li><a href="../../actor/{{actor.id}}">
+				{{ actor.name }}</a></li>
+		{% endfor %}
+	</actors>
+	<review> Review:
+		{% for review in movie.rate.all %}
+			{{review.rating}} <br />
+			{{review.comment}} <br />
+		{% endfor %}
+</p>
+{% endblock %}
