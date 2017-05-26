@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="sidebar">
+    {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
+</div>
+<h1>
+	Actors
+  {%  if  user.is_authenticated %}
+    (<a  href="{%  url  'imovie:actor_create'  %}">add</a>)
+  {% endif %}
+</h1>
+<u1>
+	{% for actor in latest_actor_list %}
+		<li><a href="./{{actor.id}}">
+			{{ actor.name }}</a></li>
+	{% empty %}<li>Sorry, no actors registered yet.</li>
+	{% endfor %}
+</u1>
+{% endblock %}

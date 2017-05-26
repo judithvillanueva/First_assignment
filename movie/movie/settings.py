@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'imovie',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,6 +69,11 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}
 
 WSGI_APPLICATION = 'movie.wsgi.application'
 

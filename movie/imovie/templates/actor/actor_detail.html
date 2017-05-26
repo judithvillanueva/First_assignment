@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="sidebar">
+    {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
+</div>
+<h1>
+	{{ actor.name }}
+  {%  if  user  ==  actor.user  %}
+    (<a  href="{%  url  'imovie:actor_edit'  actor.id  %}">edit</a>)
+    (<a  href="{%  url  'imovie:actor_delete'  actor.id  %}">delete</a>)
+  {% endif %}
+</h1>
+<p>
+	<birthday> Birthday: {{ actor.birthday }} </birthday> <br />
+	<biography> Overview: {{ actor.biography }} </biography> <br />
+</p> <br />
+<a  href="/imovie/actor">Return to Actors</a>
+{% endblock %}

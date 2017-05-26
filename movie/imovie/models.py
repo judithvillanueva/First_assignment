@@ -12,7 +12,7 @@ class Director(models.Model):
 
 	def __unicode__(self):
 		return u"%s" % self.name
-        
+
 	def get_absolute_url(self):
 		return reverse('imovie:director_detail', kwargs={'pk': self.pk})
 
@@ -24,7 +24,7 @@ class Actor(models.Model):
 	user = models.ForeignKey(User, default=1)
 
 	def __unicode__(self):
-		return u"%s" % self.name
+		return self.name
 
 	def get_absolute_url(self):
 		return reverse('imovie:actor_detail', kwargs={'pk': self.pk})

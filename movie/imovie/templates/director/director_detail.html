@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="sidebar">
+    <ul><li><a href="/imovie">Home</a></li></ul>
+</div>
+<h1>
+	{{ director.name }}
+    (<a  href="{%  url  'imovie:director_edit'  director.id  %}">edit</a>)
+    (<a  href="{%  url  'imovie:director_delete'  director.id  %}">delete</a>)
+</h1>
+<p>
+	<birthday> Birthday: {{ director.birthday }} </birthday> <br />
+	<biography> Overview: {{ director.biography }} </biography> <br />
+	<movies>
+		{% for director in director.movies.all %}
+			<li><a href="{% url 'imovie:DirectorDetail' director.id 'html' %}">
+				{{ director.name }}</a></li>
+		{% endfor %}
+	</movies>
+</p> <br />
+<a  href="/imovie/director">Return to Directors</a>
+{% endblock %}

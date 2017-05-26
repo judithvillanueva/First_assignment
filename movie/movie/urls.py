@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.contrib.auth.views import login, logout
 
 urlpatterns = [
-    url(r'^$', include('imovie.urls', namespace='imovie')),
+    url(r'^', include('imovie.urls', namespace='imovie')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^imovie/', include('imovie.urls', namespace='imovie')),
     url(r'^accounts/login/$', login, name='login'),
