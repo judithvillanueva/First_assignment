@@ -21,6 +21,9 @@ class Actor(models.Model):
 	name = models.TextField()
 	birthday = models.DateField()
 	biography = models.TextField(blank=True, null=True)
+	city = models.TextField(max_length=50, null= True)
+	country = models.TextField(max_length=50, null= True)
+	state = models.TextField(max_length=50, null= True)
 	user = models.ForeignKey(User, default=1)
 
 	def __unicode__(self):
@@ -38,10 +41,12 @@ class Category(models.Model):
 
 
 class Review(models.Model):
-	RATING_CHOICES = ((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
-	rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=0, choices=RATING_CHOICES)
-	comment = models.TextField(blank=True, null=True)
-	user = models.ForeignKey(User, default=1)
+    ''' Review atributes '''
+    RATING_CHOICES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+    rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=RATING_CHOICES)
+    comment = models.TextField(blank=True, null=True)
+    user = models.ForeignKey(User, default=1)
+    date = models.DateField(default=date.today)
 
 
 class Movie(models.Model):
@@ -53,14 +58,14 @@ class Movie(models.Model):
 	actors = models.ManyToManyField(Actor)
 
 	def __unicode__(self):
-		return u"%s" % self.name
+		return self.name
 
 	def get_absolute_url(self):
 		return reverse('imovie:movie_detail', kwargs={'pk': self.pk})
 
 
 class MovieReview(Review):
-	movies = models.ForeignKey(Movie, related_name="rate")
+	movies = models.ForeignKey(Movie)
 
 
 class MovieCategory(Category):

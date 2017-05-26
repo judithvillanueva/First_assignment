@@ -6,7 +6,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from forms import ActorForm, MovieForm, DirectorForm
 from models import Director, Movie, Actor,\
 					MovieReview, MovieCategory, Review
-from views import MovieDetail, ActorDetail, review,\
+from views import MovieDetail, ActorDetail, reviewM,\
 					DirectorDetail, ActorListAPI, ActorDetailAPI,\
 					ActorCreate, ActorDelete, MovieDelete, MovieCreate,\
 					DirectorDelete, DirectorCreate, DirectorListAPI, \
@@ -43,6 +43,9 @@ urlpatterns = [
 
 	# Movie delete
 	url(r'^movie/(?P<pk>\d+)/delete/$', MovieDelete, name='movie_delete'),
+
+	url(r'^movie/(?P<pk>\d+)/reviews/create/$', reviewM,
+		name='review_movie_create'),
 
 
 	# Actor list

@@ -95,15 +95,15 @@ def category(request, pk):
 	category.save()
 	return HttpResponseRedirect(reverse('imovie:movie_detail', args=(movie.id,ea)))
 
-def review(request, pk):
+def reviewM(request, pk):
 	movie = get_object_or_404(Movie, pk=pk)
-	review = MovieReview(
+	reviews = MovieReview(
 		rating=request.POST['rating'],
 		comment=request.POST['comment'],
 		user=request.user,
 		movie=movie)
-	review.save()
-	return HttpResponseRedirect(reverse('imovie:movie_detail', args=(movie.id,ea)))
+	reviews.save()
+	return HttpResponseRedirect(reverse('imovie:movie_detail', args=(movie.id,)))
 
 
 @api_view(['GET'])
