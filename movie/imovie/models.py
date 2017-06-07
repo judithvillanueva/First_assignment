@@ -65,7 +65,7 @@ class Movie(models.Model):
 
 
 class MovieReview(Review):
-	movies = models.ForeignKey(Movie)
+	movie = models.ForeignKey(Movie)
 
 
 class MovieCategory(Category):

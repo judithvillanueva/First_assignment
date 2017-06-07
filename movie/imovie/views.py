@@ -20,7 +20,7 @@ class MovieDetail(DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super(MovieDetail, self).get_context_data(**kwargs)
-		#context['RATING_CHOICES'] = MovieReview.RATING_CHOICES
+		context['RATING_CHOICES'] = MovieReview.RATING_CHOICES
 		return context
 
 class MovieCreate(CreateView):

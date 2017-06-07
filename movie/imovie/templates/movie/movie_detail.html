@@ -1,13 +1,23 @@
 {% extends "base.html" %}
+{%  block  title  %}Movie -{{movie.name  }}{%  endblock  %}
 {% block content %}
 <div id="sidebar">
     {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
 </div>
-<h1>
+
+<!--<h1>
 	{{ movie.name }}
     (<a  href="{%  url  'imovie:movie_edit'  movie.id  %}">edit</a>)
     (<a  href="{%  url  'imovie:movie_delete'  movie.id  %}">delete</a>)
+</h1>-->
+<span vocab="http://schema.org/"  typeof="Restaurant">
+  <h1>
+    <span property="name">{{  restaurant.name  }}</span>
+      {%  if  user  ==  restaurant.user  %}
+        (<a  href="{%  url  'myrestaurants:restaurant_edit'  restaurant.id  %}">edit</a>)
+{%  endif  %}
 </h1>
+
 <p>
 	<year> Year: {{ movie.year }} </year>  <br />
 	<overview> Overview: {{ movie.overview }} </overview>  <br />
