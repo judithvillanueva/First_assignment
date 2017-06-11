@@ -60,6 +60,14 @@ class Movie(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	def averageRating(self):
+		reviewCount = self.moviereview_set.count()
+		if not reviewCount:
+			return 0
+		else:
+			ratingSum = sum([float(review.rating) for review in self.moviereview_set.all()])
+			return ratingSum / reviewCount
+
 	def get_absolute_url(self):
 		return reverse('imovie:movie_detail', kwargs={'pk': self.pk})
 

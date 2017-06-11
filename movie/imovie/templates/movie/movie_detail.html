@@ -1,45 +1,57 @@
 {% extends "base.html" %}
 {%  block  title  %}Movie -{{movie.name  }}{%  endblock  %}
 {% block content %}
+<span vocab="http://schema.org/Movie" typeof="Movie">
+  <h1>
+    <span property="name">{{ movie.title }}</span>
+  	{{ movie.name }}
+      (<a  href="{%  url  'imovie:movie_edit'  movie.id  %}">edit</a>)
+      (<a  href="{%  url  'imovie:movie_delete'  movie.id  %}">delete</a>)
+  </h1>
+
 <div id="sidebar">
     {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
 </div>
 
-<!--<h1>
-	{{ movie.name }}
-    (<a  href="{%  url  'imovie:movie_edit'  movie.id  %}">edit</a>)
-    (<a  href="{%  url  'imovie:movie_delete'  movie.id  %}">delete</a>)
-</h1>-->
-<span vocab="http://schema.org/"  typeof="Restaurant">
-  <h1>
-    <span property="name">{{  restaurant.name  }}</span>
-      {%  if  user  ==  restaurant.user  %}
-        (<a  href="{%  url  'myrestaurants:restaurant_edit'  restaurant.id  %}">edit</a>)
-{%  endif  %}
-</h1>
-
 <p>
-	<year> Year: {{ movie.year }} </year>  <br />
-	<overview> Overview: {{ movie.overview }} </overview>  <br />
-	<director> Director: {{ movie.director }} </director> <br />
-	<actors> Actors:
+	<year><span property="year"> Year: {{ movie.year }} </span></year>  <br />
+	<overview><span property="overview"> Overview: {{ movie.overview }} </span></overview>  <br />
+	<director><span property="director"> Director: {{ movie.director }} </span></director> <br />
+	<actors>Actors:
 		{% for actor in movie.actors.all %}
-			<li><a href="../../imovie/actor/{{movie.id}}">
+			<li><a href="../../actor/{{actor.id}}">
 				{{ actor.name }}</a></li>
 		{% endfor %}
 	</actors>  <br />
 
 
   <h2>Reviews</h2>
-      <ul>
+  <span rel="aggregateRating">
+      <p typeof="AggregateRating">
+      <span property="ratingValue">{{ movie.averageRating|stringformat:".1f" }}</span>
+      {% with movie.moviereview_set.all|length as reviewCount %}
+      out of 5 stars
+      </br>
+      <span property="reviewCount">{{ reviewCount }} reviews from users</span>
+      {% endwith %}
+      </p>
+  </span>
+  <span rel="aggregateRating">
+    <ul rel="review">
           {%  for  review  in  movie.moviereview_set.all  %}
-              <li>
-                  <p>{{  review.rating  }}  star{{  review.rating|pluralize  }}</p>
-                  <p>{{  review.comment  }}</p>
+          <li typeof="Review">
+
+                  <p><span property="Comments">{{  review.comment  }}</span></p>
+                  <span property="worstRating" content="1"></span>
+                  <p><span property="valueRating">{{  review.rating  }} </span> star{{  review.rating|pluralize  }}</p>
+                  <span property="bestRating" content="5"></span>
                   <p>Created  by  {{  review.user  }}  on  {{  review.date  }}</p>
               </li>
           {%  endfor  %}
       </ul>
+  </span>
+    <span rel="aggregateRating">
+
           <h3>Add Review</h3>
           {%  if  user.is_authenticated  %}
               <form  action="{%  url  'imovie:review_movie_create'  movie.id  %}"  method="post">
@@ -54,6 +66,7 @@
                   </p>
               <input  type="submit"  value="Review"  />
               </form>
+            </span>
           {% else %}
               <p>Please, log in first</p>
   {% endif %}
