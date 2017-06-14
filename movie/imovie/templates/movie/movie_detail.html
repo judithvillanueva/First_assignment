@@ -36,10 +36,10 @@
       {% endwith %}
       </p>
   </span>
-  <span rel="aggregateRating">
-    <ul rel="review">
+  <span rel="Review">
+    <ul typeof="Review">
           {%  for  review  in  movie.moviereview_set.all  %}
-          <li typeof="Review">
+          <li property="Review">
 
                   <p><span property="Comments">{{  review.comment  }}</span></p>
                   <span property="worstRating" content="1"></span>
@@ -50,8 +50,6 @@
           {%  endfor  %}
       </ul>
   </span>
-    <span rel="aggregateRating">
-
           <h3>Add Review</h3>
           {%  if  user.is_authenticated  %}
               <form  action="{%  url  'imovie:review_movie_create'  movie.id  %}"  method="post">
