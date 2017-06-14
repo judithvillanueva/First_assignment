@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
+<span vocab="http://schema.org/Actor" typeof="Actor">
 <div id="sidebar">
     {% block sidebar %}<ul><li><a href="/imovie">Home</a></li></ul>{% endblock %}
 </div>
 <h1>
-	{{ actor.name }}
+	<span property="name">{{ actor.name }}</span>
   {%  if  user  ==  actor.user  %}
     (<a  href="{%  url  'imovie:actor_edit'  actor.id  %}">edit</a>)
     (<a  href="{%  url  'imovie:actor_delete'  actor.id  %}">delete</a>)
   {% endif %}
 </h1>
 <p>
-	<birthday> Birthday: {{ actor.birthday }} </birthday> <br />
-	<biography> Overview: {{ actor.biography }} </biography> <br />
-  <biography> City: {{ actor.city }} </city> <br />
-  <biography> Country: {{ actor.country }} </country> <br />
-  <biography> State: {{ actor.state }} </state> <br />
+	<birthday> Birthday: <span property="name">{{ actor.birthday }}</span> </birthday> <br />
+	<biography> Overview: <span property="name">{{ actor.biography }}</span> </biography> <br />
+  <biography> City: <span property="name">{{ actor.city }}</span> </city> <br />
+  <biography> Country: <span property="name">{{ actor.country }} </span> </country> <br />
+  <biography> State: <span property="name">{{ actor.state }} </span> </state> <br />
 </p> <br />
 <a  href="/imovie/actor">Return to Actors</a>
+</span>
 {% endblock %}
